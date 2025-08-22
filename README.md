@@ -15,6 +15,7 @@ This project was required by the LAPR4 curricular unit/subject (Laboratory/Proje
 ## Technologies/Tools Used
 
 - **Java**
+- **C language**
 - **Spring Boot**
 - **Maven**
 - **Domain-Driven-Design**
