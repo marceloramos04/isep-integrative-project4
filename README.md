@@ -81,3 +81,11 @@ Caso o utilizador pretenda limpar os artefatos produzidos em builds anteriores, 
 To generate plantuml diagrams for documentation execute the script (for the moment, only for linux/unix/macos):
 
 `./generate-plantuml-diagrams.sh`
+
+## Collaborators
+
+- Dephane Cabral
+- Hugo Pais
+- Marcelo Ramos
+- Rafael Rocha
+- Tiago Correia
