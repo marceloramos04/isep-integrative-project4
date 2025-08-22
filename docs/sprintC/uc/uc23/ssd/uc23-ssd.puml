@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Customer_Manager as cm
+participant System as sys
+
+activate cm
+cm -> sys: ask to upload file
+
+activate sys
+sys --> cm: list and ask to select job offer
+deactivate
+
+cm -> sys: select job offer
+
+activate sys
+sys --> cm: list and ask to select job application
+deactivate
+
+cm -> sys: select job application
+
+activate sys
+sys --> cm: ask file path
+deactivate
+
+cm -> sys: enter file path
+
+activate sys
+sys --> cm: display file format validation output
+deactivate
+
+deactivate cm
+@enduml

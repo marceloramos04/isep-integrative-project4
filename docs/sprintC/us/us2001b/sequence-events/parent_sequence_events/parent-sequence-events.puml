@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "Parent Process" as parent
+
+parent -> parent: loads configurations from config-file
+parent -> parent: creates monitor process with shared semaphore
+parent -> parent: creates worker processes with memory shared with all workers
+
+loop while SIGINT not received
+    parent -> parent: checks monitor semaphore
+
+    alt if monitor semaphore indicates new files
+
+        loop for every file in directory
+        parent -> parent: extracts **application-id** and checks if application has been assigned to a worker
+
+            alt if application not assigned
+
+                loop for each worker and while available worker not found
+                parent -> parent: checks worker shared memory to see if worker is free
+                    alt if worker is free
+                    parent -> parent: assigns application to worker using its shared memory and marks **application-id** as assigned
+                    end
+                end
+            end
+        end
+    end
+
+    parent -> parent: Sleeps the amount of time set by the check interval configuration
+
+end
+@enduml

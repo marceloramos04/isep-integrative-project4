@@ -1,0 +1,22 @@
+@startuml
+
+title UC20 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant System as s
+
+u -> s: starts the process to execute the verification of the requirements
+
+s -> u: shows the list of job openings on the screening phase
+
+u -> s: selects one job opening
+
+s -> u: asks for confirmation
+
+u -> s: confirms the selection
+
+s -> u: returns success message
+
+@enduml

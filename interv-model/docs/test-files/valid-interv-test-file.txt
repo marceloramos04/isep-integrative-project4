@@ -1,0 +1,18 @@
+Q: Do you like programming? (yes/no)
+A: no
+
+Q: Whats your favourite programming language? (single choice)
+1. Java
+2. C#
+3. PHP
+A: 2
+
+Q: What programing language should be used for system XPTO? (multiple choice)
+1. Java
+2. Javascript
+3. Python
+4. C
+A: 1,2
+
+Q: On a scale of 1-5, how would you rate your skills in solving problems?
+A: 4

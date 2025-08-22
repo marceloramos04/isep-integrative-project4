@@ -1,0 +1,36 @@
+@startuml
+
+title UC030 CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class TcpChatCli {
++createAuthRequest(byte[] usernameBytes, byte[] passwordBytes)
++sendAuthRequest(DataOutputStream out, String username, String password)
++sendOptionRequest(DataOutputStream out, int optionCode)
++sendCommTestRequest(DataOutputStream out)
++sendDisconnRequest(DataOutputStream out)
++handleServerMessages()
++handleJobOpeningInfoResponse(data);
+
+}
+
+class TcpChatSrvSum{
++sendJobOpeningInfo(List<JobOpeningInfo> jof)
+
+}
+
+class CustomerRepository{
++getJobOpeningsInfoByCustomerId(Connection connection, long customerId)
+
+}
+
+TcpChatCli ..> TcpChatSrvSum
+TcpChatSrvSum ..> CustomerRepository
+
+
+TcpChatCli -|> Runnable
+
+@enduml

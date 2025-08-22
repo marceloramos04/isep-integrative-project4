@@ -1,0 +1,61 @@
+@startuml
+
+title UC09 SEQUENCE DIAGRAM
+
+autonumber
+
+actor CostumerManager as cm
+participant ShowCandidateDetailsUI as ui
+participant ShowCandidateDetailsController as c
+participant TopNWordCountController as t
+participant WordCountThread as wct
+
+participant ShowCandidateDetailsRepository as repo
+
+activate cm
+
+cm -> ui: initializes the program
+activate ui
+
+ui --> cm : asks for the candidate id or candidate email
+deactivate ui
+
+cm -> ui : inputs id of the desired candidate
+activate ui
+
+ui -> c : listCandidateData(int candidateId)
+
+activate c
+
+c -> repo : findByCandidateId(int candidateId)
+activate repo
+
+repo -> c: return the candidate details
+deactivate repo
+
+c->t:retrieveTop20Words(files)
+activate t
+
+t->wct:retrieveTop20Words(file)
+activate wct
+
+wct-->wct:getTop20Words()
+
+wct-->wct:orderTop20()
+
+wct->t:retrieveTop20Words(file)
+deactivate wct
+
+t -> c: return top20 words and their count
+deactivate t
+
+c -> ui: return the candidate details\nand top20 words and their count
+deactivate c
+
+
+
+ui -> cm: shows the candidate details and the top20 words mentioned
+deactivate ui
+deactivate cm
+
+@enduml

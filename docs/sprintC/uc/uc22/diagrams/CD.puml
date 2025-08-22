@@ -1,0 +1,44 @@
+@startuml
+
+class ScheduleInterviewUI {
+    + run()
+}
+
+class ScheduleInterviewController {
+    +getApplicationsByCandidateId(Long id)
+    +getCandidateIdByEmail(EmailAddress email)
+    +getJobOpenings(List<Long> jobIds)
+    +saveApplication(Application application,Interview interview)
+}
+
+
+class CandidateRepository {
+
+}
+
+class ApplicationRepository {
+
+}
+
+class JobOpeningRepository{
+
+}
+
+class Application{
++isApproved()
++setInterview(interview)
+}
+
+class Interview{
++Interview(LocalDateTime interviewDateTime, LocalDate endDate,InterviewStatus code)
+}
+
+ScheduleInterviewUI ..> ScheduleInterviewController
+ScheduleInterviewController ..> ApplicationRepository
+ScheduleInterviewController ..> CandidateRepository
+ScheduleInterviewController ..> JobOpeningRepository
+ScheduleInterviewController ..> Application
+ScheduleInterviewController ..> Interview
+
+
+@enduml

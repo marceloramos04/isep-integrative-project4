@@ -1,0 +1,37 @@
+@startuml
+
+title UC03 SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant DisableUserUI as ui
+participant DisableUserController as c
+participant DeactivateUserService as service
+participant UserRepository as repo
+
+u -> ui: starts the process to enable user
+
+ui -> c: listEnabledUsers()
+
+c -> repo: listEnabledUsers()
+
+repo -> c: return enabledUsers
+
+c -> ui: return enabledUsers
+
+ui -> u: shows the list of users and asks to select one
+
+u -> ui: selects one user
+
+ui -> u: asks for confirmation
+
+u -> ui: confirms
+
+ui -> c: disableUser()
+
+c -> service: disableUser()
+
+service -> repo: update()
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+title UC02 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant System as s
+
+u -> s: starts the process to enable user
+
+s -> u: shows the list of users and asks to select one
+
+u -> s: selects one user
+
+s -> u: asks for confirmation
+
+u -> s: confirms
+
+
+@enduml

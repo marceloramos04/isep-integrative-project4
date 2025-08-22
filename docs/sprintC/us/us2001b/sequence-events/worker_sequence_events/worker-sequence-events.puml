@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "Worker Process" as work
+
+loop while not terminated by parent process
+    work -> work: checks the shared memory for application assignment
+
+    alt if application is assigned
+
+        loop for each file in input directory
+            work -> work: checks if file belongs to assigned application
+
+            alt if file belongs to assigned application
+                work -> work: adds file to a list (application files list)
+            end
+        end
+
+        work -> work: gets the job offer reference from the application files list \nand creates the corresponding directory in the output directory
+        work -> work: creates directory for assigned application inside job offer directory
+
+        loop for each file in application files list
+            work -> work: moves file to application directory
+        end
+
+        work -> work: resets shared memory value to indicate that the work is done
+    end
+
+    work -> work: sleeps the amount of time set in configuration file
+end
+
+@enduml

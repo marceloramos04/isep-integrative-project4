@@ -1,0 +1,42 @@
+@startuml
+
+title Domain Model Level II
+
+object Client {
+    id
+    email
+}
+
+object JobOffer {
+    id
+    reference
+    function
+    contractType
+    mode
+    address
+    numberVacances
+    description
+    requerements
+    interviewModel
+    phases
+    result
+}
+
+object Application {
+     id
+     interviewResult
+     emailContent
+}
+
+object Applicant {
+    id
+    email
+    phoneNumber
+    name
+}
+
+Client"1" <- "*"JobOffer:clientId
+JobOffer"1"<- "*"Application:jobOfferId
+Application"*" -> "1"Applicant:applicantId
+
+@enduml

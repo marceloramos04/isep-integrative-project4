@@ -1,0 +1,6 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Customer_Manager -> (UC23 - Upload a text file with the candidate responses for an interview)
+
+@enduml

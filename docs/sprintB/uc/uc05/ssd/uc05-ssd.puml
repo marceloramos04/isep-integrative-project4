@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title UC05 SSD - Register a Customer
+autonumber
+
+participant Customer_Manager as user
+participant System as sys
+
+activate user
+user -> sys: ask to register a customer
+
+activate sys
+sys --> user: ask the customer name
+deactivate
+
+user -> sys: enter customer name
+
+activate sys
+sys --> user: ask the customer email
+deactivate
+
+user -> sys: enter the customer email
+
+activate sys
+sys --> user: ask the customer code
+deactivate
+
+user -> sys: enter the customer code
+
+activate sys
+sys --> user: ask customer address
+deactivate
+
+user -> sys: enter customer address
+
+activate sys
+sys --> user: operation success/failure
+deactivate
+
+@enduml

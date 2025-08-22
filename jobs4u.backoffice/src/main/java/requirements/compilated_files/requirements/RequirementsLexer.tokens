@@ -1,0 +1,13 @@
+T__0=1
+T__1=2
+T__2=3
+ID=4
+SPECIAL_CHAR=5
+INT=6
+DOUBLE=7
+NEWLINE=8
+ENDLINE=9
+BLANK=10
+'#'=1
+':'=2
+','=3

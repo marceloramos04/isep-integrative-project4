@@ -1,0 +1,54 @@
+@startuml
+
+title CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class TcpChatCli {
++createAuthRequest(byte[] usernameBytes, byte[] passwordBytes)
++sendAuthRequest(DataOutputStream out, String username, String password)
++sendOptionRequest(DataOutputStream out, int optionCode)
++sendCommTestRequest(DataOutputStream out)
++sendDisconnRequest(DataOutputStream out)
++handleServerMessages()
++handleNotificationsListResponse(byte[] data)
+
+}
+
+class TcpChatSrvSum{
++getCustomerIdByEmail(String email)
++sendNotifications(List<Notifications> notis)
++handleNotificationsListResponse(byte[] data)
++Notifications(long Id,String notification, int isRead)
+}
+
+class Notifications{
+-long Id;
+-long customerId;
+-String notification;
+-int isRead;
+
+}
+
+class CustomerRepository{
++getJobOpeningsByCustomerId(Connection connection, long customerId, String email)
++determineCurrentPhase(ResultSet resultSet, LocalDate lastLogInDate)
++getAllNotifications(Connection connection)
++getLocalDate(ResultSet resultSet, String columnLabel)
++isWithinRange(LocalDate check, LocalDate start, LocalDate end)
++storePhaseTransition(Connection connection, long jobId, PhaseInfo phaseInfo, long customerId, boolean isFirstLogin)
++sendNotification(Connection connection, long customerId, String message)
+
+}
+
+TcpChatCli ..> TcpChatSrvSum
+TcpChatSrvSum ..> Notifications
+TcpChatSrvSum ..> CustomerRepository
+TcpChatCli ..> Notifications
+
+
+TcpChatCli -|> Runnable
+
+@enduml

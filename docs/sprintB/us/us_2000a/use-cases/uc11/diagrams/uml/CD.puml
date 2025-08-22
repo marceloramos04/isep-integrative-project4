@@ -1,0 +1,41 @@
+@startuml
+
+title US2000a CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class RegisterCandidateUI {
+
+}
+
+class RegisterCandidateController {
+
+}
+
+class RegisterCandidateDto {
+
+}
+
+class RegisterCandidateService {
+
+}
+
+
+class Candidate {
+
+}
+
+class CandidateRepository {
+
+}
+
+
+RegisterCandidateUI ..> RegisterCandidateController
+RegisterCandidateController ..> RegisterCandidateService: registerCandidateService
+RegisterCandidateService ..> CandidateRepository:repository
+RegisterCandidateUI -|> Runnable
+CandidateRepository -right-> "1"Candidate
+
+@enduml

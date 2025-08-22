@@ -1,0 +1,77 @@
+@startuml
+
+title US2000a SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as a
+participant RegisterCandidateUI as ui
+participant RegisterCandidateController as c
+participant RegisterCandidateService as s
+participant CandidateRepository as repo
+participant UserFactory as uf
+participant UserRepository as ur
+participant RegisterCandidateDto as rc
+
+
+
+activate a
+a -> ui: asks to register a candidate
+activate ui
+
+ui -> c** : create
+
+ui --> a: requests data(i.e. name, phoneNumber,email)
+deactivate ui
+
+a -> ui: types requested data
+activate ui
+
+ui-->ui:validates data(i.e. name, phoneNumber,email)
+
+ui -> rc** : create
+
+ui --> rc : registerCandidateDto(name,phoneNumber,email)
+activate rc
+
+rc-->ui: registerCandidateDto
+deactivate rc
+
+ui --> c:saveCandidate(registerCandidateDto)
+activate c
+
+
+c --> s: save(registerCandidateDto)
+activate s
+
+s --> repo: save(registerCandidateDto)
+activate repo
+
+repo --> s: candidate
+deactivate repo
+
+s --> c: candidate
+deactivate s
+
+c-->c:keeps candidate
+
+c-->ui:candidate
+
+c-->uf:createUser(candidateName, candidateEmail, role)
+activate uf
+
+uf-->ur:createUser(candidateName, candidateEmail, role)
+activate ur
+
+ur-->uf:user
+deactivate ur
+
+uf-->c:user
+deactivate uf
+
+c-->ui:user
+deactivate c
+
+      ui --> a: displays operation success
+    deactivate ui
+@enduml

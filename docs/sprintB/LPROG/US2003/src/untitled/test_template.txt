@@ -1,0 +1,12 @@
+Job Opening{
+    Job Requirements{
+        Data Field: Experience in COMPSCI,
+        Data Field: Education in COMPSCI,
+        Data Field: Skills in COMPSCI
+    },
+    Candidate Fields{
+        Data Field: John Doe,
+        Data Field: johndoe@gmail.com,
+        Data Field: 123456789
+    }
+}

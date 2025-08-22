@@ -1,0 +1,10 @@
+# Enter the number of years of experience (integer)
+Experience-years: 2
+
+# Select one or more programming languages you are proficient in (java; javascript; python)
+Programming-languages: java, javascript
+
+# Select one degree (None; Bachelor; Master; PhD)
+Academic-degree: None
+
+High-school-graduation-grade: 15

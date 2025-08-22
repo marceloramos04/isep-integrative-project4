@@ -1,0 +1,42 @@
+@startuml
+
+title US12 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as a
+participant ListAllCandidatesUI as ui
+participant ListAllCandidatesController as c
+participant ListAllCandidatesService as s
+participant CandidateRepository as repo
+
+
+
+activate a
+a -> ui: asks to list all candidate
+activate ui
+
+ui -> c** : create
+
+ui-->c:listAllCandidate()
+activate c
+
+c-->s:listAllCandidate()
+activate s
+
+s-->repo:findAlll()
+activate repo
+
+repo-->s:listOfcandidates
+deactivate repo
+
+s-->c:listOfcandidates
+deactivate s
+
+c-->ui:listOfcandidates
+deactivate c
+
+
+      ui --> a: displays operation success
+    deactivate ui
+@enduml

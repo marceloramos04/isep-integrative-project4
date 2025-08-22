@@ -1,0 +1,4 @@
+input_dir: '/media/sf_applications-files-bot/input_dir'
+output_dir: '/media/sf_applications-files-bot/output_dir'
+num_workers: 5
+check_interval: 5

@@ -1,0 +1,71 @@
+@startuml
+
+title UC21 CLASS DIAGRAM
+
+interface Runnable {
+    +run()
+}
+
+class ClosePhaseUI {
+    + run()
+}
+
+class ClosePhaseController {
+    + getJobOpeningsWithActivePhases()
+    + jobOpeningExists(int input)
+    + closePhase(int input)
+}
+
+class JobOpeningRepository {
+    + save()
+}
+
+class JobOpening {
+    - id;
+    - recruitmentProcess;
+
+    + isActive()
+    + closeActivePhase()
+}
+
+class RecruitmentProcess {
+    - applicationPhase;
+    - screeningPhase;
+    - interviewPhase;
+    - analysisPhase;
+    - resultsPhase;
+
+    + closeActivePhase()
+    + getActivePhase()
+}
+
+class GetActiveJobOpeningsService{
+    + getJobOpeningsWithActivePhases()
+}
+
+class ClosePhaseService{
+    + closePhase(long jobOpeningIndex)
+}
+
+class Phase{
+    - startDate;
+    - endDate;
+    + isActive();
+}
+
+Runnable -|> ClosePhaseUI
+
+ClosePhaseUI ..> ClosePhaseController
+
+ClosePhaseController ..> GetActiveJobOpeningsService
+ClosePhaseController ..> JobOpeningRepository
+ClosePhaseController ..> JobOpening
+ClosePhaseController ..> ClosePhaseService
+
+JobOpeningRepository ..> JobOpening
+JobOpening -> RecruitmentProcess
+RecruitmentProcess -> Phase
+
+GetActiveJobOpeningsService .l.> JobOpeningRepository
+
+@enduml

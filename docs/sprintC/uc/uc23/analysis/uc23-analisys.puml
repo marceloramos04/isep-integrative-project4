@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+
+object JobOpening
+
+object JobApplication{
+    interview result
+}
+
+JobOpening <- JobApplication: references
+
+@enduml

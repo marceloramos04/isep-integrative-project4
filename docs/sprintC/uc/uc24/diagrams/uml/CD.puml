@@ -1,0 +1,50 @@
+@startuml
+
+title UC024 CLASS DIAGRAM
+
+interface Runnable {
++run()
+}
+
+class GradeIntervUI {
++run()
+}
+
+class GradeIntervController {
++gradeInterviewAnswers(file,app)
++saveApplication( apps)
++getApplicationsByJobOffer(jobOfferId)
++chooseJobOpening()
+
+}
+
+class JobOpeningRepository{
++findAll()
+
+}
+
+class ApplicationRepository{
++save(app)
++findApplicationsByJobOfferId(jobOfferId)
+
+}
+
+class Application{
++uploadInterviewGrade(grade)
+}
+
+
+class IntervModelRunner {
++evaluateFile(file)
+}
+
+
+
+GradeIntervUI --|> Runnable
+GradeIntervUI ..> GradeIntervController
+GradeIntervController ..> ApplicationRepository
+GradeIntervController ..> Application
+GradeIntervController ..> JobOpeningRepository
+GradeIntervController ..> IntervModelRunner
+
+@enduml

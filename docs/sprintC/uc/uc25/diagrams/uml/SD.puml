@@ -1,0 +1,71 @@
+@startuml
+
+title US11 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor CustomerManager as a
+participant RetrieveCandidatesOrderedListUI as ui
+participant RetrieveCandidatesOrderedListController as c
+participant RetrieveCandidatesOrderedListService as s
+participant ApplicationRepository as repo
+participant JobOpeningRepository as repo2
+
+
+
+
+activate a
+a -> ui: asks to get an ordered list of candidates,\n using the job interview points (grades),
+activate ui
+
+ui -> c** : create
+
+ui --> c : retrieveJobOpennings()
+activate c
+
+c --> repo2 : findAll()
+activate repo2
+
+repo2 --> c : jobOpenings
+deactivate repo2
+
+c --> ui : jobOpenings
+deactivate c
+
+ui->a :shows all job openings and asks to select one by id
+deactivate ui
+
+a->ui: selects one jobOpening
+activate ui
+
+ui-->ui: keeps id
+
+ui --> c:retrieveCandidatesByInterviewPoints(id)
+activate c
+
+c-->repo: findApplicationsByJobOfferId(id)
+activate repo
+
+repo-->c: listOfJobOpeningApplication
+deactivate repo
+
+c-->s: getCandidatesOrderedList(listOfJobOpeningApplication)
+activate s
+
+s-->s: getOnlyApplicationsWithInterview(applications)
+
+s-->s:sortApplicationsByInterviewPointsDescending(applications)
+
+s-->s:getCandidates(applications)
+
+s-->c:candidatesOrderedByInterviewPoints
+deactivate s
+
+c-->ui:candidatesOrderedByInterviewPoints
+deactivate c
+
+      ui --> a: displays candidatesOrderedByInterviewPoints
+
+      ui --> a: displays operation success
+    deactivate ui
+@enduml

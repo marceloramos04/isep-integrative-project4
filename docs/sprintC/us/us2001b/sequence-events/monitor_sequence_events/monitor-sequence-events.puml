@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "Monitor Process" as mon
+
+loop while not terminated by parent process
+    mon -> mon: checks for new files
+
+    alt if new files found
+        mon -> mon: checks shared semaphore to see if parent is still processing other files
+
+        alt if parent is free
+            mon -> mon: changes semaphore value to indicate parent that there are new files
+        end
+    end
+
+    mon -> mon: sleeps the amount of time specified in the configuration file
+end
+
+@enduml

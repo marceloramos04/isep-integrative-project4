@@ -1,0 +1,30 @@
+@startuml
+
+title UC02 CLASS DIAGRAM
+
+interface Runnable {
+    +run()
+}
+
+class DisableUserUI {
+    + run()
+}
+
+class DisableUserController {
+    + enableUser()
+}
+
+class UserRepository {
+    + enableUser()
+}
+
+class UserDeactivationService {
+    + deactivateUser()
+}
+
+Runnable -|> DisableUserUI
+DisableUserUI ..> DisableUserController
+DisableUserController ..> UserDeactivationService
+UserDeactivationService .> UserRepository
+
+@enduml

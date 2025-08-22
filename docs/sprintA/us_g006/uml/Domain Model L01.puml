@@ -1,0 +1,15 @@
+@startuml
+
+title Domain Model AOO
+
+object Client
+object JobOffer
+object Application
+object Applicant
+
+
+Client"1" - "*"JobOffer: offers
+JobOffer"1" - "*"Application: receives
+Application"*" - "1"Applicant: submited by
+
+@enduml

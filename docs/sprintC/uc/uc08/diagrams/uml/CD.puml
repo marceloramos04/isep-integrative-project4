@@ -1,0 +1,30 @@
+@startuml
+
+title UC08 CLASS DIAGRAM
+
+interface Runnable {
+    + run()
+}
+
+class ListApplicationsUI {
+    + run()
+}
+
+class ListApplicationController {
+    + listApplications()
+}
+
+class ApplicationRepository {
+    + listApplications()
+}
+
+class ListApplicationsService {
+    + findByJobOfferId()
+}
+
+ListApplicationsUI -|> Runnable
+ListApplicationsUI ..> ListApplicationController
+ListApplicationController ..> ListApplicationsService
+ListApplicationsService .> ApplicationRepository
+
+@enduml

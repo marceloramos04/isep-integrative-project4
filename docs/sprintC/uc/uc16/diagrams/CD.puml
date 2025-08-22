@@ -1,0 +1,49 @@
+@startuml
+
+class AddRankingUI {
+    + run()
+}
+
+class AddRankingController {
+    +addRanking(JobOpening jobOpening, Candidate candidate, String rank, int numToBeRanked)
+    +addRanking(JobOpening jobOpening, Candidate candidate, String rank)
+    +saveJobOpening(JobOpening jobOpening)
+    +candidateHasAppToJob(Long candidateId,Long jobOfferId)
+    getJobOpeningById(Long jobOpeningId)
+}
+
+class ListCandidateDataController{
+    +getCandidateIdByEmail(EmailAddress email)
+}
+
+class ListApplicationsForJobOfferController {
+    +findApplicationsByJobOfferID(jobOpeningId)
+}
+
+class CandidateRepository {
+
+}
+
+class ApplicationRepository {
+
+}
+
+class Ranking {
+
++Ranking(Long candidateId, Long jobOpeningId, String rank, int numToBeRanked)
++Ranking(Long candidateId, Long jobOpeningId, String rank)
+}
+
+
+class JobOpeningRepository
+
+AddRankingUI ..> AddRankingController
+AddRankingUI ..> ListApplicationsForJobOfferController
+AddRankingUI ..> ListCandidateDataController
+ListApplicationsForJobOfferController ..> ApplicationRepository
+ListCandidateDataController ..> CandidateRepository
+ListCandidateDataController ..> Ranking
+AddRankingController ..> JobOpeningRepository
+
+
+@enduml

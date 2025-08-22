@@ -1,0 +1,30 @@
+@startuml
+
+title UC06 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant RegisterJobOpeningUI as ui
+participant RegisterJobOpeningController as c
+participant JobOpeningRepository as repo
+
+o -> ui: starts the process of registering a new job opening
+
+ui -> o: asks for the job opening details
+
+o -> ui: provides the job opening details
+
+
+
+ui -> c: registerJobOpening()
+
+c -> repo: registerJobOpening()
+
+repo -> c: jobOpening
+
+c -> ui: jobOpening
+
+ui -> o: shows the new jobOpening information
+
+@enduml

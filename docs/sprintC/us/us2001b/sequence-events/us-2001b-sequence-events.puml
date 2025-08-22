@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant "Parent Process" as parent
+participant "Monitor Process" as monitor
+participant "Worker Process" as worker
+
+parent -> parent : loads configurations
+parent -> monitor : creates monitor with a shared semaphore
+
+group monitor concurrent work
+monitor -> monitor: checks for new files
+alt if files detected
+monitor --> monitor: checks if semaphore value = 0, to check if parent is free
+alt if semaphore value = 0
+monitor -> monitor: sets semaphore value to 1
+end
+
+parent -> parent: assings new files to workers
+parent -> parent: reverses semaphore state
+end
+end
+monitor --> parent: notifies of new files the shared semaphore
+
+parent -> worker: creates with a memory area shared between the parent and all workers
+
+
+loop until parent process doesn't receive SIGINT
+
+alt if new files detected in input dir
+
+
+parent -> worker: assings job application files
+worker -> worker : processes files
+worker -> parent: notifies of job completion and updates report
+
+end
+
+end
+
+parent -> parent: generates report
+
+@enduml

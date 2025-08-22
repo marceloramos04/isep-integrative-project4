@@ -1,0 +1,32 @@
+@startuml
+
+class LoginUI {
+    + run()
+}
+
+class AuthenticationController {
+    - authenticationManager
+    - authorizationService
+    + login()
+}
+
+class AuthenticationService {
+    + loadUserByUsername()
+}
+
+class SecurityConfig {
+    - authorizationService
+    - passwordEncoder()
+    + authenticationManager()
+}
+
+class UserRepository {
+
+}
+
+LoginUI ..> AuthenticationController
+AuthenticationController ..> SecurityConfig
+AuthenticationController ..> AuthenticationService
+AuthenticationService ..> UserRepository
+
+@enduml

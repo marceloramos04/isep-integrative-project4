@@ -1,0 +1,12 @@
+@startuml
+
+actor Operator as op
+
+left to right direction
+
+op --> (UC11 - Register a candidate)
+op --> (UC12 - List candidates)
+op --> (UC13 - Register application of a candidate)
+op --> (UC14 - Generate template file to help collect data from candidates)
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+
+title UC025 CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class RetrieveCandidatesOrderedListUI {
+
+}
+
+class JobOpeningRepository {
+
+}
+
+
+class RetrieveCandidatesOrderedListController {
+
+}
+
+
+class RetrieveCandidatesOrderedListService {
+
+}
+
+
+class ApplicationRepository {
+
+}
+
+class Interview {
+
+}
+
+class Application {
+
+}
+
+class InterviewStatus {
+
+}
+
+
+RetrieveCandidatesOrderedListUI ..> RetrieveCandidatesOrderedListController
+RetrieveCandidatesOrderedListController ..>RetrieveCandidatesOrderedListService: retrieveCandidatesOrderedListService
+RetrieveCandidatesOrderedListController ..>JobOpeningRepository: jobOpeningRepository
+ApplicationRepository ..>Application: contains
+RetrieveCandidatesOrderedListController ..>ApplicationRepository: repository
+Application ..>Interview: has >
+Interview ..>InterviewStatus: has >
+
+RetrieveCandidatesOrderedListUI -|> Runnable
+
+@enduml

@@ -1,0 +1,96 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Customer_Manager as actor
+participant UploadIntervAnswersUI as ui
+participant UploadIntervAnswersController as ctrl
+participant JobOpeningRepository as joRepo
+participant ApplicationRepository as appRepo
+participant ApplicationManagementService as serv
+participant IntervModel as intervModel
+participant Application as app
+participant Interview as interv
+
+activate actor
+actor -> ui: ask to upload file
+
+activate ui
+ui -> ctrl: getJobOpeningsInInterviewPhase()
+
+activate ctrl
+ctrl -> joRepo: getJobOpeningsInInterviewPhase()
+
+activate joRepo
+joRepo --> ctrl: job openings
+deactivate
+
+ctrl --> ui: job openings
+deactivate
+
+ui --> actor: list and ask to select job opening
+deactivate
+
+actor -> ui: select job opening
+
+activate ui
+ui -> ctrl: getApplicationsForJobOpening(jobOpeningID)
+
+activate ctrl
+ctrl -> appRepo: findApplicationsByJobOfferId(jobOpeningID)
+
+activate appRepo
+appRepo --> ctrl: applications for job opening
+deactivate
+
+ctrl --> ui: applications for job opening
+deactivate
+
+ui --> actor: list and ask to select job application
+deactivate
+
+actor -> ui: select job application
+
+activate ui
+ui --> actor: ask file path
+deactivate
+
+actor -> ui: enter file path
+
+activate ui
+ui -> ctrl: registerIntervAnswers(file, application)
+
+activate ctrl
+ctrl -> serv: uploadAnswersFile(file, application)
+
+activate serv
+serv --> intervModel: validateFileSyntax(file)
+
+activate intervModel
+intervModel --> serv: true/false
+deactivate
+
+alt if validateFileSyntax() returns true
+
+serv -> app: uploadIntervAnswersFile(file)
+
+activate app
+app -> interv: setAnswersFile(file)
+app --> serv
+deactivate
+
+serv -> appRepo: save(application)
+end
+
+serv --> ctrl: true/false
+deactivate
+
+ctrl --> ui: true/false
+deactivate
+
+ui --> actor: success/insuccess
+deactivate
+
+deactivate actor
+@enduml

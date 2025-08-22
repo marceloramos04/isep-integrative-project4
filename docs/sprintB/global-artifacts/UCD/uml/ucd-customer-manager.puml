@@ -1,0 +1,9 @@
+@startuml
+
+left to right direction
+
+actor CustomerManager as cm
+
+cm --> (UC9 - Display data of a candidate)
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+title UC01 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor Administrator as a
+participant System as s
+
+a -> s: starts registering a user
+
+s -> a: asks for user e-mail
+
+a -> s: types user e-mail
+
+s -> a: shows a list of roles and asks to select one
+
+a -> s: selects one role
+
+s -> a: shows user data and asks for confirmation
+
+a -> s: confirms
+
+@enduml

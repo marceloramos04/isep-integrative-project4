@@ -1,0 +1,36 @@
+@startuml
+
+title US4000 CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class TopNWordCountUI {
+
+}
+
+class TopNWordCountController {
+
+}
+
+
+class WordCountThread {
+
+}
+
+
+class Word {
+
+}
+
+
+
+
+TopNWordCountUI ..> TopNWordCountController
+TopNWordCountController ..>WordCountThread: thread
+WordCountThread ..>Word
+
+TopNWordCountUI -|> Runnable
+
+@enduml

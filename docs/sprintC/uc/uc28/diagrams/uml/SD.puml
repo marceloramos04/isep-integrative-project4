@@ -1,0 +1,28 @@
+@startuml
+
+title UC28 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant UploadRequirementsFileUI as u
+participant UploadRequirementsFileController as c
+participant UploadRequirementsFileService as s
+
+o -> u: stats upload of requirements file
+
+u -> c: Upload Requirements File
+
+c -> s: Upload Requirements File
+
+s -> s: Validate File
+
+s -> s: Save File
+
+s -> c: File Uploaded
+
+c -> u: File Uploaded
+
+u -> o: File Uploaded
+
+@enduml

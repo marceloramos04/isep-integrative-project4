@@ -1,0 +1,24 @@
+@startuml
+
+title UC07 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant ListJobOpeningUI as ui
+participant ListJobOpeningController as c
+participant JobOpeningRepository as repo
+
+o -> ui: starts the process of listing
+
+ui -> c: getJobOpenings()
+
+c -> repo: findAll()
+
+repo -> c: return jogOpeningsList
+
+c -> ui: return jogOpeningsList
+
+ui -> o: shows all job openings
+
+@enduml

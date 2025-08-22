@@ -1,0 +1,25 @@
+@startuml
+
+title UC07 CLASS DIAGRAM
+
+interface Runnable {
+    + run()
+}
+
+class ListJobOpeningUI {
+    + run()
+}
+
+class ListJobOpeningController {
+    + listApplications()
+}
+
+class JobOpeningRepository {
+    + listApplications()
+}
+
+ListJobOpeningUI -|> Runnable
+ListJobOpeningUI ..> ListJobOpeningController
+ListJobOpeningController ..> JobOpeningRepository
+
+@enduml

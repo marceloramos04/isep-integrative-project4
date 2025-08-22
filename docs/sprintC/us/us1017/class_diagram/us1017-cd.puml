@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class UploadIntervAnswersUI
+class UploadIntervAnswersController{
++ getJobOpeningsInInterviewPhase(): List<JobOpening>
++ getApplicationsForJobOpening(jobOpeningId: Long): List<Application>
++ registerInterviewAnswers(file String, app Application)
+}
+
+class JobOpeningRepository{
++ getJobOpeningsInInterviewPhase(): List<JobOpening>
+}
+
+class ApplicationRepository{
++ findApplicationsByJobOfferId(id Long): List<Application>
++ save(application Application): Application
+}
+
+class ApplicationManagementService{
++ uploadAnswersFile(file String, application Application): boolean
+}
+
+class InterviewModel {
++ validateFileSyntax(file String): boolean
+}
+
+class Application {
+- interview Interview
++ uploadAnswersFile(file String)
+}
+
+class Interview {
+- answersFile String
++ uploadAnswersFile(file String)
+}
+
+UploadIntervAnswersUI ..> UploadIntervAnswersController
+UploadIntervAnswersController ..> JobOpeningRepository
+UploadIntervAnswersController ..> ApplicationRepository
+UploadIntervAnswersController ..> ApplicationManagementService
+ApplicationManagementService ..> InterviewModel
+ApplicationManagementService ..> Application
+Application *-- Interview
+
+@enduml

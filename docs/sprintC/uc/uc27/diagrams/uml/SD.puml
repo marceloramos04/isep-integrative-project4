@@ -1,0 +1,72 @@
+@startuml
+
+title UC27 Sequence Diagram
+
+autonumber
+
+actor CustomerManager as cm
+participant ListApplicationDataUI as ui
+participant ListApplicationDataController as controller
+participant ListJobOpeningsService as service1
+participant ListApplicationsService as service2
+participant ShowApplicationDataService as service3
+participant JobOpeningRepository as repo1
+participant ApplicationRepository as repo2
+participant JobOpening as job
+participant Application as app
+
+cm -> ui: starts the process of showing application data
+
+ui -> controller:  showJobOpeningList()
+
+controller -> service1: getJobOpenings()
+
+service1 -> repo1: findAll()
+
+repo1 -> job: returns job openings
+
+repo1 -> service1: returns job openings
+
+service1 -> controller: returns job openings
+
+controller -> ui: returns job openings
+
+ui -> controller: shows job openings and asks the user to select one
+
+cm -> ui: selects a job opening
+
+ui -> controller: showApplicationList(jobOpeningId)
+
+controller -> service2: getApplications(jobOpeningId)
+
+service2 -> repo2: findByJobOpeningId(jobOpeningId)
+
+repo2 -> app: returns applications
+
+repo2 -> service2: returns applications
+
+service2 -> controller: returns applications
+
+controller -> ui: returns applications
+
+ui -> controller: shows applications and asks the user to select one
+
+cm -> ui: selects an application
+
+ui -> controller: showApplicationData(applicationId)
+
+controller -> service3: getApplicationData(applicationId)
+
+service3 -> repo2: findById(application)
+
+repo2 -> app: returns application
+
+repo2 -> service3: returns application
+
+service3 -> controller: returns application
+
+controller -> ui: returns application
+
+ui -> controller: shows application data
+
+@enduml

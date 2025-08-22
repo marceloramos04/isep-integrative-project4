@@ -1,0 +1,100 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!pragma useIntermediatePackages false
+
+interface Runnable{
+}
+
+class RegisterApplicationUI{
++run()
+-askJobApplication():
+-askCandidateEmail(): String
+-askCandidateName(): String
+-askCandidatePhoneNumber(): String
+-askApplicationFilesDir(): boolean
+-conclude()
+}
+
+class RegisterApplicationCtrl{
+#getJobOffers():List<JobOffer>
+#checkEmail(email String): boolean
+#registerCandidate(name String, email String, phoneNumber String): boolean
+#registerApplication(candidateEmail String, String filesDiretory): boolean
+}
+
+interface JobOpeningRepository{
++findActiveJobOffers(date LocalDate)
+}
+
+package eapli.framework.strings.util{
+class StringPredicates{
+isEmail(): boolean
+}
+}
+
+package eapli.framework.general.domain.model{
+class EmailAddress
+}
+
+class CandidateRepository{
++findCandidateByEmail(email String): Candidate
+
+class CustomerCode <<Value Object>>{
++checkCustomerCodeFormat(code String): boolean
+}
+
+class Candidate <<Entity>>{
+-name Title
+-email EmailAddress
+-phone PhoneNumber
+}
+
+class CandidateManagementService{
++isThereCandidate(email String): boolean
++registerCandidate(name String, email String, phoneNumber PhoneNumber): boolean
+}
+
+
+
+class PhoneNumber <<Value Object>>{
+-number: String
++checkPhoneNumberFormat(number String): boolean
+}
+
+class ApplicationManagementService{
++registerJobApplication(candidateEmail String, filesDiretory String): boolean
+}
+
+class Application{
+-jobReference JobReference
+-String filesDiretory
+}
+
+class ApplicationRepository{
++save(app Application)
+}
+
+class UserFactory{
+}
+
+Runnable <|.. RegisterApplicationUI
+
+RegisterApplicationUI <.. RegisterApplicationCtrl
+
+RegisterApplicationCtrl..>CandidateManagementService
+
+RegisterApplicationCtrl..>StringPredicates
+UserFactory<.r. RegisterApplicationCtrl
+
+CandidateManagementService..>Candidate:creates and persists
+EmailAddress<..Candidate
+RegisterApplicationCtrl..>JobOpeningRepository
+RegisterApplicationCtrl..>ApplicationManagementService
+ApplicationManagementService..>Application
+ApplicationManagementService..>ApplicationRepository
+ApplicationRepository..>Application
+Candidate..>PhoneNumber
+CandidateManagementService..>CandidateRepository
+
+@enduml

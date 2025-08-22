@@ -1,0 +1,39 @@
+@startuml
+
+title UC29 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Candidate as c
+participant TcpCliChat as tc
+participant TcpSrvSum as ts
+participant CandidateRepository as cr
+
+
+activate c
+c -> tc: connects to the customer server
+
+activate tc
+tc -> ts: candidate server connects to the follow up server
+deactivate tc
+activate ts
+ts --> tc: connection established
+activate tc
+deactivate ts
+tc --> c: shows the candidate menu and asks for input
+c -> tc : select a option
+tc -> ts: sendOptionRequest(DataOutputStream out, int optionCode)
+deactivate tc
+activate ts
+ts -> cr: getCandidateApplications(onnection,candidateId)
+deactivate ts
+activate cr
+cr --> ts : returns the candidate applications info
+deactivate cr
+activate ts
+ts --> tc: returns the candidate applications info
+deactivate ts
+activate tc
+tc --> c: handleApplicationListResponse(data); -- displays the candidate applications info
+
+@enduml

@@ -1,0 +1,35 @@
+# Random comment
+Q: What programing language should be used for system XPTO?
+1. Java
+2. PHP
+3. Javascript
+4. Typescript
+A: 1, 2
+
+Q: Do you like software development?
+A: yes
+
+# Another random comment
+Q: Short text question
+A: i am a text
+
+Q: Date question
+A: 22/12/2222
+
+Q: Enter a random scale?
+A: 1-5
+
+Q: Time question?:
+A: 09:00
+
+Q: Integer number question?
+A: 5
+
+Q: Decimal number question?
+A: 5.9
+
+Q: Another decimanl number question?
+A: 5,9
+
+asdfasd a sdfas dfa ssdf adsfd
+asdf asd f asdf asfd

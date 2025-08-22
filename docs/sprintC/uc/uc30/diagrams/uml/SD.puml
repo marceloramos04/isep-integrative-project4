@@ -1,0 +1,39 @@
+@startuml
+
+title UC30 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Customer as c
+participant TcpCliChat as tc
+participant TcpSrvSum as ts
+participant CustomerRepository as cr
+
+
+activate c
+c -> tc: connects to the customer server
+
+activate tc
+tc -> ts: customer server connects to the follow up server
+deactivate tc
+activate ts
+ts --> tc: connection established
+activate tc
+deactivate ts
+tc --> c: shows the customer menu and asks for input
+c -> tc : select a option
+tc -> ts: sendOptionRequest(DataOutputStream out, int optionCode)
+deactivate tc
+activate ts
+ts -> cr: getJobOpeningsInfoByCustomerId(connection,customerId)
+deactivate ts
+activate cr
+cr --> ts : returns the job openings
+deactivate cr
+activate ts
+ts --> tc: returns the job openings
+deactivate ts
+activate tc
+tc --> c: handleJobOpeningInfoResponse(data); -- displays the job openings
+
+@enduml

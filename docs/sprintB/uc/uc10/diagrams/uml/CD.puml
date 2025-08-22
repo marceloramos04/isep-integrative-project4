@@ -1,0 +1,25 @@
+@startuml
+
+title UC10 CLASS DIAGRAM
+
+interface Runnable {
+    + run()
+}
+
+class SetupPhasesUI {
+    + run()
+}
+
+class SetupPhasesController {
+    + listApplications()
+}
+
+class JobOpeningRepository {
+    + listApplications()
+}
+
+SetupPhasesUI -|> Runnable
+SetupPhasesUI ..> SetupPhasesController
+SetupPhasesController ..> JobOpeningRepository
+
+@enduml

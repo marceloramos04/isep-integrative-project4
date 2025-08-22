@@ -1,0 +1,31 @@
+@startuml
+
+title UC08 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant ListApplicationsUI as ui
+participant ListApplicationsController as c
+participant ListApplicationsService as service
+participant ApplicationRepository as repo
+
+o -> ui: starts the process of listing
+
+ui -> o: shows a list of job openings and asks the user to select one
+
+ui -> c: listApplications()
+
+c -> service: listApplications()
+
+service -> repo: findByJobOfferId()
+
+repo -> service: return applicationList
+
+service -> c: return applicationList
+
+c -> ui: return applicationList
+
+ui -> o: shows application list for the job opening
+
+@enduml

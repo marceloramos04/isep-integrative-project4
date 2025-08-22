@@ -1,0 +1,14 @@
+@startuml
+
+left to right direction
+
+actor CustomerManager as cm
+
+cm --> (UC5 - Register customer)
+cm --> (UC6 - Register job opening)
+cm --> (UC7 - List job openings)
+cm --> (UC8 - List applications for a job opening)
+cm --> (UC9 - Display data of a candidate)
+cm --> (UC10 - Setup phases of the process for a job opening)
+
+@enduml

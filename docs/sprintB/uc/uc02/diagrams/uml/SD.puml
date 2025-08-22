@@ -1,0 +1,37 @@
+@startuml
+
+title UC02 SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant ActivateUserUI as ui
+participant ActivateUserController as c
+participant UserActivationService as service
+participant UserRepository as repo
+
+u -> ui: starts the process to enable user
+
+ui -> c: listDesabledUsers()
+
+c -> repo: listDesabledUsers()
+
+repo -> c: return desabledUsers
+
+c -> ui: return desabledUsers
+
+ui -> u: shows the list of users and asks to select one
+
+u -> ui: selects one user
+
+ui -> u: asks for confirmation
+
+u -> ui: confirms
+
+ui -> c: enableUser()
+
+c -> service: enableUser()
+
+service -> repo: updateUser()
+
+@enduml

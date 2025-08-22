@@ -1,0 +1,57 @@
+@startuml
+
+title UC20 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant VerificationRequirementsUI as ui
+participant VerificationRequirementsController as c
+participant GetJobOpeningsOnScreeningPhaseService as service1
+participant JobOpeningRepository as repo1
+participant VerificationRequirementsService as service2
+participant Application as app
+participant ApplicationRepository as repo2
+participant JobOpening as u
+
+o -> ui: starts the process to execute the verification of the requirements
+
+ui -> c: getJobOpeningsOnTheScreeningPhase()
+
+c -> service1: getJobOpeningsOnTheScreeningPhase()
+
+service1 -> repo: findAll()
+
+repo -> service1: returns list with all job openings
+
+service1 -> c: after filtering, returns list of job openings on the screening phase
+
+c -> ui: returns the list of job openings on the screening phase
+
+ui -> o: shows the list of job openings on the screening phase and asks to select one
+
+o -> ui: selects one job opening
+
+ui -> o: shows the job opening selected and asks for confirmation
+
+o -> ui: confirms the job opening
+
+ui -> c: verifyRequirements()
+
+c -> service2: verifyRequirements()
+
+service2 -> app: getRequirementsFile()
+
+app -> service2: returns the file
+
+service2 -> app: approves the requirements
+
+service2 -> repo2: verifies the requirements and saves the result in the database
+
+service2 -> c: returns success
+
+c -> ui: returns success
+
+ui -> o: shows success message
+
+@enduml

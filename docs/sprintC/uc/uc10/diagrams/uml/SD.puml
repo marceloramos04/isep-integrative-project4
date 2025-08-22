@@ -1,0 +1,48 @@
+@startuml
+
+title UC10 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant SetupPhasesUI as ui
+participant SetupPhasesController as c
+participant JobOpeningRepository as repo
+
+o -> ui: starts the process of selecting a job opening
+
+ui -> c: getJobOpenings()
+
+c -> repo: findAll()
+
+repo -> c: return jogOpeningsList
+
+c -> ui: return jogOpeningsList
+
+ui -> o: shows all job openings and asks to select one
+
+o -> ui: selects a job opening
+
+ui -> c: getJobOpeningById()
+
+c -> repo: findById()
+
+repo -> c: return jobOpening
+
+c -> ui: return jobOpening
+
+ui -> o: shows job opening details and asks the dates of each phase
+
+o -> ui: enters the dates of each phase
+
+ui -> c: setDates()
+
+c -> repo: save()
+
+repo -> c: return jobOpening
+
+c -> ui: return jobOpening
+
+ui -> o: shows the success message
+
+@enduml

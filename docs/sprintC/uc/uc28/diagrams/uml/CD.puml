@@ -1,0 +1,25 @@
+@startuml
+
+title UC28 CLASS DIAGRAM
+
+interface Runnable {
+    +void run()
+}
+
+class UploadRequirementsFileUI {
+    +void uploadRequirementsFile()
+}
+
+class UploadRequirementsFileController {
+    +void uploadRequirementsFile()
+}
+
+class UploadRequirementsFileService {
+    +void uploadRequirementsFile()
+}
+
+UploadRequirementsFileUI -up-|> Runnable
+UploadRequirementsFileUI .r.> UploadRequirementsFileController
+UploadRequirementsFileController ..> UploadRequirementsFileService
+
+@enduml

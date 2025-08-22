@@ -1,0 +1,36 @@
+@startuml
+
+title UC029 CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class TcpChatCli {
++createAuthRequest(byte[] usernameBytes, byte[] passwordBytes)
++sendAuthRequest(DataOutputStream out, String username, String password)
++sendOptionRequest(DataOutputStream out, int optionCode)
++sendCommTestRequest(DataOutputStream out)
++sendDisconnRequest(DataOutputStream out)
++handleServerMessages()
++handleApplicationListResponse(byte[] data)
+
+}
+
+class TcpChatSrvSum{
+sendApplicationsList(List<ApplicationInfo> applications)
+
+}
+
+class CandidateRepository{
+getCandidateApplications(Connection connection, int candidateId)
+
+}
+
+TcpChatCli ..> TcpChatSrvSum
+TcpChatSrvSum ..> CandidateRepository
+
+
+TcpChatCli -|> Runnable
+
+@enduml

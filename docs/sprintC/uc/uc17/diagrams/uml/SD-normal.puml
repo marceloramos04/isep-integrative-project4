@@ -1,0 +1,48 @@
+@startuml
+
+title UC17 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant EditJobOpeningUI as ui
+participant EditJobOpeningController as c
+participant EditJobOpeningService as service
+participant JobOpeningRepository as repo
+participant JobOpening as u
+
+o -> ui: starts the process to edit a job opening
+
+ui -> c: getJobOpenings()
+
+c -> repo: findAll()
+
+repo -> c: returns list with all job openings
+
+c -> ui: returns the list of job openings
+
+ui -> o: shows the list of job openings asks for selection
+
+o -> ui: selects one job opening
+
+ui -> o: displays the job opening and asks for the desired editing parameter
+
+o -> ui: selects the desired editing parameter
+
+ui -> o: asks for the new parameter value
+
+o -> ui: inputs the new parameter value
+
+ui -> c: edit*Parameter*()
+
+c -> service: edit*Parameter*()
+
+service -> repo: save()
+
+service -> c: returns the result of the operation
+
+c -> ui: returns success
+
+ui -> o: shows the success message
+
+@enduml

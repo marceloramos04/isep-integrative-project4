@@ -1,0 +1,7 @@
+@startuml
+
+actor CustomerManager as cm
+
+cm --> (UC8 - List applications for a job opening)
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+
+title UC025 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor CustomerManager as a
+participant System as s
+
+activate a
+
+a -> s: asks to get Candidates ordered by their interview Points
+
+activate s
+
+s --> a: shows list of job opening and ask to choose one
+deactivate s
+
+a -> s: chooses one
+activate s
+
+s --> a: shows candidates ordered list
+
+
+s--> a :displays operation success
+deactivate s
+
+@enduml

@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title UC13 SSD - Register Job Application
+autonumber
+
+participant Operator as user
+participant System as sys
+
+activate user
+user -> sys: ask to register job application
+
+activate sys
+sys --> user: show and ask to select job offers from the system
+deactivate
+
+user -> sys: choose job offer
+
+activate sys
+sys --> user: ask the candidate email
+deactivate
+
+user -> sys: enter the candidade email
+activate sys
+
+alt if candidate not registered
+sys --> user: ask candidade name
+deactivate
+
+user -> sys: enter candidade name
+
+activate sys
+sys --> user: ask candidate phone number
+deactivate
+
+user->sys: enter candidate phone number
+activate sys
+end
+
+sys --> user: ask application files directory
+deactivate
+
+user -> sys: enter application files directory
+
+activate sys
+sys-->user: operation success/failure
+deactivate
+
+@enduml

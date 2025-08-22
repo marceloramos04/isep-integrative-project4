@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title UC13 Analysis - Register Job Application
+
+object Operator{
+}
+
+object JobOffer
+
+object JobApplication{
+files
+}
+
+object Candidate{
+name
+email
+phone number
+}
+
+JobApplication ->JobOffer : references
+Candidate -> JobApplication: submits
+Operator -> JobApplication: registers
+Operator --> Candidate: registers
+
+@enduml

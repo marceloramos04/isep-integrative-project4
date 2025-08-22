@@ -1,0 +1,32 @@
+@startuml
+
+title UC02 CLASS DIAGRAM
+
+interface Runnable {
+    +run()
+}
+
+class ActivateUserUI {
+    + run()
+}
+
+class ActivateUserController {
+    + listDeactivatedUsers()
+    + activateUser()
+}
+
+class UserActivationService {
+    + activateUser()
+}
+
+class UserRepository {
+    + findByStatus()
+}
+
+Runnable -|> ActivateUserUI
+ActivateUserUI ..> ActivateUserController
+ActivateUserController ..> UserRepository
+ActivateUserController ..> UserActivationService
+UserActivationService .> UserRepository
+
+@enduml

@@ -1,0 +1,117 @@
+@startuml
+
+autonumber
+
+actor User as u
+participant AddRankingUI as ui
+participant AddRankingController as ctrl
+participant ListCandidateDataController as ctrl1
+participant ListApplicationsForJobOfferController as ctrl2
+participant CandidateRepository as crep
+participant JobOfferRepository as jrep
+participant ApplicationRepository as arep
+participant Ranking as rank
+
+activate u
+u -> ui : Initiciates the process of adding a ranking to a job opening
+activate ui
+ui --> u : Asks for the id of the job offer to rank candidates for
+deactivate ui
+u -> ui : Inputs the id of the job offer
+activate ui
+ui -> ctrl : getJobOpeningById(jobOpeningId)
+deactivate ui
+activate ctrl
+ctrl ->jrep : getJobOpeningById(jobOpeningId)
+deactivate ctrl
+activate jrep
+jrep --> ctrl : Returns the job opening
+deactivate jrep
+activate ctrl
+ctrl --> ui : Return the job opening
+deactivate ctrl
+activate ui
+ui --> u : Asks for the number of extra candidates to add
+deactivate ui
+u -> ui : Inputs the number of extra candidates to add
+activate ui
+ui -> ctrl2 : findApplicationsByJobOfferID(jobOpeningId)
+deactivate ui
+activate ctrl2
+ctrl2 -> arep : findApplicationsByJobOfferID(jobOpeningId)
+deactivate ctrl2
+activate arep
+arep --> ctrl2 : Returns the applications list
+deactivate arep
+activate ctrl2
+ctrl2 --> ui : Returns the applications list
+deactivate ctrl2
+activate ui
+ui --> u : Asks for the emails of the candidates to rank
+deactivate ui
+u -> ui : Inputs the emails of the candidates to rank
+activate ui
+loop for each candidate that the user wants to rank
+ui -> ctrl1 : findCandidatesByEmails(emails)
+deactivate ui
+activate ctrl1
+ctrl1 -> crep : findCandidatesByEmails(emails)
+deactivate ctrl1
+activate crep
+crep --> ctrl1 : Returns the candidate
+deactivate crep
+activate ctrl1
+ctrl1 --> ui : Returns the candidate
+deactivate ctrl1
+activate ui
+ui --> u : Asks for the ranking of the candidate
+deactivate ui
+u -> ui : Inputs the ranking of the candidate
+activate ui
+ui -> ctrl : addRankingToJobOpening(jobOpeningId, candidateId, rank,numToBeRanked)
+deactivate ui
+activate ctrl
+ctrl -> rank** : creates a ranking for the candidate
+deactivate ctrl
+activate rank
+rank --> ctrl : Returns the ranking
+deactivate rank
+activate ctrl
+ctrl -> jrep : addRanking(ranking)
+deactivate ctrl
+activate jrep
+jrep --> ctrl : informs sucess
+deactivate jrep
+ctrl --> ui : informs sucess
+deactivate ctrl
+activate ui
+end
+loop for all the candidates that didnt get ranked (rank = 'rank not recorded')
+ui -> ctrl : addRanking(jobOpeningId,candidateId,rank)
+deactivate ui
+activate ctrl
+ctrl -> rank** : creates a ranking for the candidate
+deactivate ctrl
+activate rank
+rank --> ctrl : Returns the ranking
+deactivate rank
+activate ctrl
+ctrl -> jrep : addRanking(ranking)
+deactivate ctrl
+activate jrep
+jrep --> ctrl : informs sucess
+deactivate jrep
+activate ctrl
+ctrl --> ui : informs sucess
+activate ui
+end
+deactivate ctrl
+
+ui --> u : informs the user that the rankings were added
+deactivate ui
+deactivate u
+
+
+
+
+@enduml

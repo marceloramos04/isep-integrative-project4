@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title UC05 Sequence Diagram - Register a Customer
+autonumber
+
+actor Operator as actor
+participant RegisterApplicationUI as ui
+participant RegisterApplicationCtrl as ctrl
+participant JobOpeningRepository as job_rep
+participant "eapli.framework...EmailAddress" as email
+participant CandidateRepository as candidate_rep
+participant CandidateManagementService as cand_service
+participant ApplicationManagementService as app_service
+participant Application as app
+participant ApplicationRep as app_rep
+
+activate actor
+actor -> ui: ask to register job applications
+
+activate ui
+ui -> ctrl: getActiveJobOffers()
+
+activate ctrl
+ctrl -> job_rep: getActiveJobOffers()
+
+activate job_rep
+job_rep --> ctrl: activeJobOffers
+deactivate
+
+ctrl-->ui:activeJobOffers
+deactivate
+
+ui-->actor: shows activeJobOffers and asks to select one
+deactivate
+
+actor->ui: selects job offer
+
+activate ui
+ui-->actor:asks for candidate email
+deactivate
+
+actor -> ui: enter the candidade email
+
+activate ui
+ui->ctrl:checkEmailFormat(email)
+
+activate ctrl
+ctrl->email:isEmail(email)
+
+activate email
+email-->ctrl:true/false
+deactivate
+
+ctrl-->ui:true/false
+deactivate
+
+ui->ctrl:isThereCandidate(email)
+
+activate ctrl
+ctrl->candidate_rep:isThereCandidate(email)
+
+activate candidate_rep
+candidate_rep-->ctrl:true/false
+deactivate
+
+ctrl-->ui:true/false
+deactivate
+
+alt if candidate not registered
+ui --> actor: ask candidade name
+deactivate
+
+actor -> ui: enter candidade name
+
+activate ui
+ui --> actor: ask candidate phone number
+deactivate
+
+actor->ui: enter candidate phone number
+activate ui
+
+ui->ctrl:registerCandidate(name, email, phoneNumber)
+
+activate ctrl
+ctrl->cand_service:save(name, email, phoneNumber)
+
+activate cand_service
+cand_service-->ctrl
+deactivate
+
+ctrl-->ui
+deactivate
+end
+
+ui --> actor: ask application files directory
+deactivate
+
+actor -> ui: enter application files directory
+
+activate ui
+ui->ctrl:registerJobApplication(email, filesDiretory)
+
+activate ctrl
+ctrl->app_service:registerJobApplication(email,filesDiretory)
+
+activate app_service
+app_service->app**
+app_service->app_rep:save(application)
+app_service-->ctrl:true/false
+deactivate
+
+ctrl-->ui:true/false
+deactivate
+
+ui-->actor: operation success/failure
+deactivate
+
+@enduml

@@ -1,0 +1,85 @@
+@startuml
+
+title UC24 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Customer_manager as c
+participant GradIntervUI as ui
+participant GradeIntervController as ct
+participant Application as a
+participant ApplicationRepository as repo
+participant IntervModelRunner as interv
+participant JobOpeningRepository as jr
+
+activate c
+activate ui
+c -> ui: starts the process of grading the interviews of a job offer
+
+activate ct
+ui -> ct: chooseJobOpening()
+
+activate jr
+ct -> jr : findAll()
+
+jr --> ct : returns list of all job openings
+deactivate jr
+
+ct --> ui : returns list of all job openings
+deactivate ct
+
+ui --> c: asks user to select the job opening he wishes to grade all applications for
+
+c -> ui : selects the job opening
+
+activate ct
+ui -> ct: getApplicationsByJobOffer(jobId)
+
+activate repo
+ct -> repo : getApplicationsByJobOffer(jobId)
+
+repo --> ct : returns list of applications for the selected job opening
+deactivate repo
+
+ct --> ui : returns list of applications for the selected job opening
+
+
+loop for each application that has interview answers
+
+    ui -> ct : gradeInterviewAnswers(app.getInterview().getIntervAnswersFile(), app)
+
+    activate interv
+    ct -> interv : evaluateFile(file)
+
+    interv --> ct : returns the evaluation of the file
+    deactivate interv
+
+    activate a
+    ct -> a : uploadInterviewGrade(grade);
+
+    a --> ct : returns application
+    deactivate a
+
+    ct --> ui : returns application
+    deactivate ct
+end
+
+
+ui -> ct : saveApplication(appsGraded)
+
+activate ct
+ct -> repo : save(app)
+
+activate repo
+repo --> ct : returns success
+
+
+ct --> ui : returns success
+deactivate repo
+
+ui -> c : returns success and prints the graded interviews
+deactivate ct
+deactivate ui
+deactivate c
+
+@enduml

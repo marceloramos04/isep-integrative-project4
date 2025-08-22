@@ -1,0 +1,5 @@
+Long id
+String jobOffer
+String emailContent
+Candidate files
+String candidate

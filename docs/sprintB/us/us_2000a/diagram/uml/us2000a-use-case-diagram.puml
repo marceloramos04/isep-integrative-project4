@@ -1,0 +1,7 @@
+@startuml
+
+actor Operator as o
+
+o --> (UC11 - As Operator, I want to register a candidate and create a corresponding user)
+
+@enduml

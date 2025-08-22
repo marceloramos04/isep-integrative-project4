@@ -1,0 +1,47 @@
+@startuml
+
+title UC21 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant ClosePhaseUI as ui
+participant ClosePhaseController as c
+participant GetActiveJobOpeningsService as service1
+participant JobOpeningRepository as repo
+participant ClosePhaseService as service2
+participant JobOpening as u
+
+o -> ui: starts the process to close a phase of a job opening
+
+ui -> c: getJobOpeningsWithActivePhases()
+
+c -> service1: getJobOpeningsWithActivePhases()
+
+service1 -> repo: findAll()
+
+repo -> service1: returns list with all job openings
+
+service1 -> c: after filtering, returns list of job openings with active phases
+
+c -> ui: returns the list of job openings with active phases
+
+ui -> o: shows the list of job openings with active phases and asks for selection
+
+o -> ui: selects one job opening
+
+ui -> c: closePhase()
+
+c -> service2: closePhase()
+
+service2 -> u: closePhase()
+
+service2 -> c: returns job opening with closed phase
+
+c -> repo: saves job opening with closed phase
+
+c -> ui: returns success
+
+ui -> o: shows success message
+
+@enduml

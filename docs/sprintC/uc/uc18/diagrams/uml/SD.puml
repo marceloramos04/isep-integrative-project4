@@ -1,0 +1,46 @@
+@startuml
+
+title UC18 SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant ActivateCandidateUI as ui
+participant ActivateCandidateController as c
+participant ListDisabledUsersService as service1
+participant UserActivationService as service2
+participant User as user
+participant UserRepository as repo
+
+
+u -> ui: starts the process to enable user
+
+ui -> c: listDisabledUsers()
+
+c -> service1: listDisabledUsers()
+
+service1 -> repo: listDisabledUsers()
+
+repo -> service1: returns list of disabled users
+
+service1 -> c: returns list of disabled users
+
+c -> ui: returns the list of disabled users
+
+ui -> u: shows the list of users and asks to select one
+
+u -> ui: selects one user
+
+ui -> u: asks for confirmation
+
+u -> ui: confirms
+
+ui -> c: enableUser()
+
+c -> service2: enableUser()
+
+service2 -> user: enableUser()
+
+service2 -> repo: updateUser()
+
+@enduml

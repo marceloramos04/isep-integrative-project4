@@ -1,0 +1,25 @@
+@startuml
+
+title UC06 CLASS DIAGRAM
+
+interface Runnable {
+    + run()
+}
+
+class RegisterJobOpeningUI {
+    + run()
+}
+
+class RegisterJobOpeningController {
+    + registerJobOpening()
+}
+
+class JobOpeningRepository {
+    + save()
+}
+
+RegisterJobOpeningUI -|> Runnable
+RegisterJobOpeningUI ..> RegisterJobOpeningController
+RegisterJobOpeningController ..> JobOpeningRepository
+
+@enduml

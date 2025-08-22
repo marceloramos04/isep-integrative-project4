@@ -1,0 +1,12 @@
+@startuml
+
+actor Administrator as adm
+
+left to right direction
+
+adm --> (UC01 - Register users of the backoffice)
+adm --> (UC02 - Enable users of the backoffice)
+adm --> (UC03 - Disable users of the backoffice)
+adm --> (UC04 - List users of the backoffice)
+
+@enduml

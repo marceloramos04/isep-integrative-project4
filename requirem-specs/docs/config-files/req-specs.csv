@@ -1,0 +1,6 @@
+DESCRIPTION;TYPE;EXPECTED;POSSIBLE_ANSWERS;COMMENT
+Experience-years;num_int;2;integer;Enter the number of years of experience
+High-school-graduation-grade;num_float;14;float;Enter the average you ended up with in High School
+Programming-languages;multiple;java,javascript;java,javascript,python;Select one more languages you are proeficient in
+Academic-degree;order;bachelor;None,Bachelor,Master,PhD;Select one degree
+Have-car;exact;yes;yes,no;Do you have car

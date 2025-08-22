@@ -1,0 +1,27 @@
+@startuml
+
+title UC09 CLASS DIAGRAM
+
+interface Runnable {
+    + run()
+}
+
+class ListCandidateDataUI {
+    + run()
+}
+
+class ListCandidateDataController {
+    + listCandidateData(int candidateId)
+    + listCandidateDataByEmail(String email)
+}
+
+class CandidateRepository {
+    + findByCandidateId(long candidateId);
+    + findByEmail (String email)
+}
+
+ListCandidateDataUI -|> Runnable
+ListCandidateDataUI ..> ListCandidateDataController
+ListCandidateDataController ..> CandidateRepository
+
+@enduml

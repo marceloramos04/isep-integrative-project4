@@ -1,0 +1,48 @@
+@startuml
+
+title UC17 SEQUENCE DIAGRAM - editing recruitment process
+
+autonumber
+
+actor Operator as o
+participant EditJobOpeningUI as ui
+participant EditJobOpeningController as c
+participant SetupPhasesService as service
+participant JobOpeningRepository as repo
+participant JobOpening as u
+
+o -> ui: starts the process to edit a job opening
+
+ui -> c: getJobOpenings()
+
+c -> repo: findAll()
+
+repo -> c: returns list with all job openings
+
+c -> ui: returns the list of job openings
+
+ui -> o: shows the list of job openings asks for selection
+
+o -> ui: selects one job opening
+
+ui -> o: displays the job opening and asks for the desired editing parameter
+
+o -> ui: selects the recruitment process
+
+ui -> o: asks for the new dates for each phase
+
+o -> ui: inputs the new dates
+
+ui -> c: editRecruitmentProcess()
+
+c -> service: editRecruitmentProcess()
+
+service -> c: returns()
+
+c -> repo: save()
+
+c -> ui: returns success
+
+ui -> o: shows the success message
+
+@enduml

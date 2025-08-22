@@ -1,0 +1,58 @@
+@startuml
+
+title Domain Model Level III
+
+object Client {
+    email
+}
+
+object ClientId {
+
+}
+
+object JobOffer {
+    reference
+    function
+    contractType
+    mode
+    address
+    numberVacances
+    description
+    requerements
+    interviewModel
+    phases
+    result
+}
+
+object JobOfferId {
+
+}
+
+object Application {
+    interviewResult
+    emailContent
+}
+
+object ApplicantId {
+
+}
+
+object Applicant {
+    email
+    phoneNumber
+    name
+}
+
+object ApplicationId {
+
+}
+
+Client"1" --> "1"ClientId
+JobOffer"*" --> "1"ClientId
+JobOffer"1" --> "1"JobOfferId
+Application"*" --> "1"JobOfferId
+Application"*" --> "1"ApplicantId
+Applicant"1" --> "1"ApplicantId
+Application"1" --> "1"ApplicationId
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+
+title UC19 SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as o
+participant DeactivateCandidateUI as ui
+participant DeactivateCandidateController as c
+participant ListActivatedCandidatesService as service1
+participant UserActivationService as service2
+participant AppUser as u
+participant UserRepository as repo
+
+o -> ui: starts the process to enable user
+
+ui -> c: listActivatedCandidates()
+
+c -> service1: listActivatedCandidates()
+
+service1 -> repo: listActivatedCandidates()
+
+repo -> service1: returns list of activated users
+
+service1 -> c: returns list of activated users
+
+c -> ui: returns the list of activated users
+
+ui -> o: shows the list of candidates and asks to select one
+
+o -> ui: selects one candidate
+
+ui -> o: asks for confirmation
+
+o -> ui: confirms
+
+ui -> c: enableUser()
+
+c -> service2: enableUser()
+
+service2 -> u: deactivateUser()
+
+service2 -> repo: updateUser()
+
+@enduml

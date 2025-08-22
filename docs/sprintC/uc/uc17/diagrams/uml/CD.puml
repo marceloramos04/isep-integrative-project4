@@ -1,0 +1,156 @@
+@startuml
+
+title UC17 CLASS DIAGRAM
+
+interface Runnable {
+    +run()
+}
+
+class EditJobOpeningUI {
+    + run()
+}
+
+class EditJobOpeningController {
+    + getJobOpeningsWithActivePhases()
+    + jobOpeningExists(int input)
+    + closePhase(int input)
+}
+
+class JobOpeningRepository {
+    + save()
+}
+
+class JobOpening {
+    - jobTitle;
+    - jobType;
+    - workingMode;
+    - companyName;
+    - jobDescription;
+    - numberVacancies;
+    - recruitmentProcess;
+
+    + editJobTitle()
+    + editJobType()
+    + editWorkingMode()
+    + editCompanyName()
+    + editJobDescription()
+    + editJobRequirements()
+    + editNumberVacancies()
+
+}
+
+class RecruitmentProcess {
+    - applicationPhase;
+    - screeningPhase;
+    - interviewPhase;
+    - analysisPhase;
+    - resultsPhase;
+
+    + closeActivePhase()
+    + getActivePhase()
+}
+
+class EditJobOpeningService{
+    + editJobTitle()
+    + editJobType()
+    + editWorkingMode()
+    + editCompanyName()
+    + editJobDescription()
+    + editJobRequirements()
+    + editNumberVacancies()
+}
+
+class SetupPhasesService{
+    + setupPhases()
+}
+
+SetupPhasesService .> EditJobOpeningController
+SetupPhasesService .> RecruitmentProcess
+SetupPhasesService .> JobOpening
+
+
+class JobTitle {
+    - title;
+}
+
+class JobType {
+    - type;
+}
+
+class WorkingMode {
+    - mode;
+}
+
+class CompanyName {
+    - name;
+}
+
+class JobDescription {
+    - description;
+}
+
+class PositiveInteger {
+    - number;
+}
+
+class ApplicationPhase {
+    - startDate;
+    - endDate;
+
+    + isActive();
+}
+
+class ScreeningPhase {
+    - startDate;
+    - endDate;
+
+    + isActive();
+}
+
+class InterviewPhase {
+    - startDate;
+    - endDate;
+
+    + isActive();
+}
+
+class AnalysisPhase {
+    - startDate;
+    - endDate;
+
+    + isActive();
+}
+
+class ResultsPhase {
+    - startDate;
+    - endDate;
+
+    + isActive();
+}
+
+Runnable -|> EditJobOpeningUI
+
+EditJobOpeningUI ..> EditJobOpeningController
+
+ EditJobOpeningController .l.> JobOpeningRepository
+EditJobOpeningController ..> JobOpening
+EditJobOpeningController ..> EditJobOpeningService
+
+EditJobOpeningService ..> JobOpening
+EditJobOpeningService ..> JobOpeningRepository
+
+JobOpeningRepository <|.. JobOpening
+JobOpening <|-- JobTitle
+JobOpening <|-- JobType
+JobOpening <|-- WorkingMode
+JobOpening <|-- CompanyName
+JobOpening <|-- JobDescription
+JobOpening <|-l- RecruitmentProcess
+RecruitmentProcess <|-l- ApplicationPhase
+RecruitmentProcess <|-l- ScreeningPhase
+RecruitmentProcess <|-l- InterviewPhase
+RecruitmentProcess <|-l- AnalysisPhase
+RecruitmentProcess <|-l- ResultsPhase
+
+
+@enduml

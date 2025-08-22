@@ -1,0 +1,29 @@
+@startuml
+
+title UC04 SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant ListUsersUI as ui
+participant ListUsersController as c
+participant ListUsersService as service
+participant UserRepository as repo
+
+u -> ui: starts the process of listing users
+
+ui -> c: listUsers()
+
+c -> service: listUsers()
+
+service -> repo: findAll()
+
+repo -> service: return userList
+
+service -> c: return userList
+
+c -> ui : return userList
+
+ui -> u: shows the list of users
+
+@enduml

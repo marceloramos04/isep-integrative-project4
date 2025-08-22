@@ -1,0 +1,49 @@
+@startuml
+
+title UC011 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor Operator as a
+participant System as s
+
+activate a
+
+a -> s: asks to register a Candidate
+
+activate s
+
+s --> a: requests data(i.e. name, phoneNumber,email)
+deactivate s
+
+a -> s: types requested data
+activate s
+
+s --> a: shows candidate new profile and asks for a confirmation
+deactivate s
+
+a -> s: confirms data
+activate s
+
+alt ["Failed Registration because the candidate already exists"]
+
+
+
+s-->a:reports operation failure due to existence of \n that candidate and asks if would like to register another candidate
+deactivate s
+
+a->s:confirms another registration
+activate s
+
+else ["Failed Registration because there is a candidate with such data"]
+
+s-->a:reports operation failure due to existence of \na candidate with that information
+deactivate s
+
+a->s:confirms another registration
+activate s
+end
+s--> a :displays operation success
+deactivate s
+
+@enduml

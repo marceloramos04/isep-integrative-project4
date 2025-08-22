@@ -1,0 +1,54 @@
+@startuml
+
+title UC19 CLASS DIAGRAM
+
+interface Runnable {
+    +run()
+}
+
+class DisableCandidateUI {
+    + run()
+}
+
+class DisableCandidateController {
+    + enableUser()
+}
+
+class UserRepository {
+    + enableUser()
+}
+
+class UserDeactivationService {
+    + deactivateUser()
+}
+
+class ListActivatedCandidatesService {
+    + listActivatedCandidates()
+}
+
+class AppUser {
+
+    - id;
+    - email;
+    - name;
+    - password;
+    - status;
+    - role;
+    - setEmail();
+    - setPassword();
+    + disableUser();
+}
+
+Runnable -|> DisableCandidateUI
+
+DisableCandidateUI ..> DisableCandidateController
+
+DisableCandidateController ..> UserDeactivationService
+DisableCandidateController ..> ListActivatedCandidatesService
+
+UserDeactivationService -left> AppUser
+
+ListActivatedCandidatesService ..> UserRepository
+UserDeactivationService ..> UserRepository
+
+@enduml

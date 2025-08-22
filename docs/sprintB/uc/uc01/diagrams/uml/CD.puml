@@ -1,0 +1,60 @@
+@startuml
+
+title UC01 CLASS DIAGRAM
+
+interface Runnable {}
+
+class RegisterUserUI {
+    + run()
+}
+
+class RegisterUserController {
+    + registerUser()
+    +getRolesAsList()
+}
+
+class AppUser {
+    - Long id
+    - String email
+    - String name
+    - String password
+    - Status status
+    - UserRole role
+
+    - setEmail()
+    - setName()
+    - setPassword()
+
+    + getPassword()
+    + getUsername()
+    + isAccountNonExpired()
+    + isAccountNonLocked()
+    + isCredentialsNonExpired()
+    + isEnabled()
+
+    + activateUser()
+    + deactivateUser()
+}
+
+class UserRepository {
+    + findByEmail()
+    + findById()
+}
+
+class UserFactory {
+    + createUser()
+}
+
+class PasswordGeneratorService {
+    + generatePassword()
+}
+
+
+RegisterUserUI ..> RegisterUserController
+RegisterUserController ..> UserFactory
+RegisterUserUI -|> Runnable
+UserFactory -> AppUser
+UserFactory --> PasswordGeneratorService
+UserFactory ..> UserRepository
+
+@enduml

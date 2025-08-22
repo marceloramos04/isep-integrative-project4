@@ -1,0 +1,12 @@
+@startuml
+
+title UC04 SYSTEM SEQUENCE DIAGRAM
+
+actor User as u
+participant System as s
+
+u -> s: starts the process of listing users
+
+s -> u: shows the list of users
+
+@enduml

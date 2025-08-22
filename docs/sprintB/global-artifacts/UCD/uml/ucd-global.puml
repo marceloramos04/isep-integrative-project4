@@ -1,0 +1,36 @@
+@startuml
+
+actor Administrator as adm
+
+left to right direction
+
+adm --> (UC01 - Register users of the backoffice)
+adm --> (UC02 - Enable users of the backoffice)
+adm --> (UC03 - Disable users of the backoffice)
+adm --> (UC04 - List users of the backoffice)
+
+actor CustomerManager as cm
+
+cm --> (UC05 - Register customer)
+cm --> (UC06 - Register job opening)
+cm --> (UC07 - List job openings)
+cm --> (UC08 - List applications for a job opening)
+cm --> (UC09 - Display data of a candidate)
+cm --> (UC10 - Setup phases of the process for a job opening)
+
+actor LanguageEngineer as le
+
+le --> (UC15 - Develop a plugin)
+
+actor Operator as op
+
+op --> (UC11 - Register a candidate)
+op --> (UC12 - List candidates)
+op --> (UC13 - Register application of a candidate)
+op --> (UC14 - Generate template file to help collect data from candidates)
+
+actor ProjectManager as pm
+
+pm --> (UC15 - Support and apply authentication and authorization for all its users and functionalities)
+
+@enduml

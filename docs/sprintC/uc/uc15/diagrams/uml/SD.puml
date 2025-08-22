@@ -1,0 +1,32 @@
+@startuml
+
+autonumber
+
+actor User as u
+participant LoginUI as ui
+participant AuthenticationController as controller
+participant AuthenticationManager as auth
+participant UserRepository as repo
+
+
+u -> ui: starts login process
+
+ui -> u: asks for email
+
+u -> ui: types email
+
+ui -> u: asks for password
+
+u -> ui: types password
+
+ui -> controller: login()
+
+controller -> auth: authenticate()
+
+auth -> controller: returns responseEntity
+
+controller -> ui: return responseEntity
+
+ui -> u: shows authentication success (instantiates the respective ui)
+
+@enduml

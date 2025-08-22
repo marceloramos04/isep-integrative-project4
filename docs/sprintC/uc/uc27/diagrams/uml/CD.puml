@@ -1,0 +1,64 @@
+@startuml
+
+title Class Diagram UC27 - List Application Data
+
+interface Runnable {
+    run();
+}
+
+class ListApplicationDataUI {
+    run();
+}
+
+class ListApplicationDataController {
+    showJobOpeningList();
+    showApplicationList();
+    showApplicationData();
+}
+
+class ListApplicationsService {
+    getApplications();
+}
+
+class ListJobOpeningsService {
+    getJobOpenings();
+}
+
+class ShowApplicationDataService {
+    showApplicationData();
+}
+
+interface ApplicationRepository {
+    findById();
+}
+
+interface JobOpeningRepository {
+    findAll();
+}
+
+class JobOpening {
+
+}
+
+class Application {
+
+}
+
+ListApplicationDataUI -|> Runnable
+
+ListApplicationDataUI ..> ListApplicationDataController
+
+ListApplicationDataController ..> ListJobOpeningsService
+ListApplicationDataController ..> ListApplicationsService
+ListApplicationDataController ..> ShowApplicationDataService
+
+ShowApplicationDataService ..> ApplicationRepository
+
+ListApplicationsService .down.> ApplicationRepository
+
+ListJobOpeningsService .down.> JobOpeningRepository
+
+JobOpening .up.> JobOpeningRepository
+Application .up.> ApplicationRepository
+
+@enduml

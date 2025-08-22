@@ -1,0 +1,91 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!pragma useIntermediatePackages false
+
+interface Runnable{
+}
+
+class RegisterCustomerUI{
++run()
+-askCustomerName(): String
+-askCustomerEmail(): String
+-askCustomerCode(): String
+-askCustomerAddress(): String
+-askConfirmation(): boolean
+-conclude()
+}
+
+class RegisterCustomerCtrl{
+#checkEmail(email String): boolean
+#checkCustomerCode(code String): boolean
+#checkZipCode(zipcode String): boolean
+#registerCustomer(name String, email String, code String, address String): boolean
+}
+
+package eapli.framework.strings.util{
+class StringPredicates{
+isEmail()
+}
+}
+
+package eapli.framework.general.domain.model{
+class EmailAddress
+}
+
+class CustomerCode <<Value Object>>{
++checkCustomerCodeFormat(code String): boolean
+}
+
+class Customer <<Entity>>{
+-name Title
+-email EmailAddress
+-code CustomerCode
+-address Address
+}
+
+class CustomerManagementService{
++isCustomerEmailUnique(email String): boolean
++isCustomerCodeUnique(code String): boolean
++registerCustomer(name String, email String, code String, address String): boolean
+}
+
+class Address <<Value Object>>{
+-street: String
+-buildingNum: Integer
+-zipcode: ZipCode
+-city: String
+}
+
+class ZipCode <<Value Object>>{
+-zipcode: String
++checkZipCodeFormat(zipcode String): boolean
+}
+
+class UserFactory{
+}
+
+Runnable <|.. RegisterCustomerUI
+
+RegisterCustomerUI <.. RegisterCustomerCtrl
+
+RegisterCustomerCtrl..>CustomerManagementService
+
+RegisterCustomerCtrl..>CustomerCode
+RegisterCustomerCtrl..>Address
+RegisterCustomerCtrl..>StringPredicates
+UserFactory<.r. RegisterCustomerCtrl
+
+CustomerManagementService..>Customer:creates and persists
+Address<..Customer
+CustomerCode<..Customer
+EmailAddress<..Customer
+Address..>ZipCode
+RegisterCustomerCtrl..>ZipCode
+
+note "out of uc scope" as out_scope1
+note "out of uc scope" as out_scope2
+
+Runnable .. out_scope1
+UserFactory..out_scope2
+@enduml

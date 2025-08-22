@@ -1,0 +1,9 @@
+@startuml
+
+actor Operator as op
+
+left to right direction
+
+op --> (UC13 - Register application of a candidate)
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+
+title UC17 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant System as s
+
+u -> s: starts the process to edit a job opening
+
+s -> u: shows the list of job openings
+
+u -> s: selects one job opening
+
+s -> u: shows the job opening details, ask to select the field to edit
+
+u -> s: selects the field to edit
+
+s -> u: asks for the new value
+
+u -> s: enters the new value
+
+s -> u: returns success message
+
+@enduml

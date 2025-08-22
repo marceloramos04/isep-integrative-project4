@@ -1,0 +1,54 @@
+@startuml
+
+title UC18 CLASS DIAGRAM
+
+interface Runnable {
+    +run();
+}
+
+class ActivateCandidateUI {
+    + run();
+}
+
+class ActivateCandidateController {
+    + listDeactivatedUsers();
+    + activateUser();
+}
+
+class ListUsersService {
+    + listDeactivatedUsers();
+}
+
+class UserActivationService {
+    + activateUser();
+}
+
+class UserRepository {
+    + findByStatus();
+}
+
+class AppUser {
+    - id;
+    - email;
+    - name;
+    - password;
+    - status;
+    - role;
+    - setEmail();
+    - setPassword();
+    + disableUser();
+    activateUser();
+}
+
+Runnable -|> ActivateCandidateUI
+ActivateCandidateUI ..> ActivateCandidateController
+
+ActivateCandidateController ..> ListUsersService
+ActivateCandidateController ..> UserActivationService
+
+UserActivationService -left-> AppUser
+UserActivationService ..> UserRepository
+
+ListUsersService ..> UserRepository
+
+@enduml

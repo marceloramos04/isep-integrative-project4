@@ -1,0 +1,42 @@
+@startuml
+
+title UC01 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor Administrator as a
+participant RegisterUserUI as ui
+participant RegisterUserController as c
+participant UserFactory as f
+participant PasswordGenerator as pg
+participant User as u
+participant UserRepository as repo
+
+
+a -> ui: starts registering a user
+
+ui -> a: asks for user e-mail
+
+a -> ui: types user e-mail
+
+ui -> a: shows a list of roles and asks to select one
+
+a -> ui: selects one role
+
+ui -> a: shows user data and asks for confirmation
+
+a -> ui: confirms
+
+ui -> c: registerUser()
+
+c -> f: registerUser()
+
+f -> pg: generatePassword()
+
+pg -> f: return newPassword
+
+f -> u: registerUser()
+
+f -> repo: save()
+
+@enduml

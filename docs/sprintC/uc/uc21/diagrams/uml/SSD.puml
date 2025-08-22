@@ -1,0 +1,18 @@
+@startuml
+
+title UC21 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant System as s
+
+u -> s: starts the process to close the phase of a job opening
+
+s -> u: shows the list of job openings with active phases
+
+u -> s: selects one job opening
+
+s -> u: returns success message
+
+@enduml

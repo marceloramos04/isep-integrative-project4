@@ -1,0 +1,9 @@
+@startuml
+
+actor Operator as op
+
+left to right direction
+
+op --> (UC14 - Generate template file to help collect data from candidates)
+
+@enduml

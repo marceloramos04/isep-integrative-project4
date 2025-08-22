@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Parent{
+read_config()
+create_monitor()
+create_workers()
+wait_new_files()
+assign_files()
+update_report()
+generate_report()
+}
+
+class Monitor{
+listen_new_files()
+notifie_parent_new_files()
+}
+
+class Worker{
+listen_new_files()
+process_files()
+work_done()
+}
+
+Parent .r.> Monitor: creates and comunicates with
+Parent ..> Worker: creates and comunicates with
+
+@enduml

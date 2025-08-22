@@ -1,0 +1,37 @@
+@startuml
+
+title UC012 CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class ListAllCandidatesUI {
+
+}
+
+class ListAllCandidatesController {
+
+}
+
+
+
+class ListAllCandidatesService {
+
+}
+
+
+
+
+class CandidateRepository {
+
+}
+
+
+ListAllCandidatesUI ..> ListAllCandidatesController
+ListAllCandidatesController ..> ListAllCandidatesService: listAllCandidateService
+ListAllCandidatesService ..> CandidateRepository:repository
+ListAllCandidatesUI -|> Runnable
+CandidateRepository -right-> "1"Candidate
+
+@enduml

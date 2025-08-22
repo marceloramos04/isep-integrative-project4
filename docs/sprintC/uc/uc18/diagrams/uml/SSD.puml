@@ -1,0 +1,20 @@
+@startuml
+
+title UC18 SYSTEM SEQUENCE DIAGRAM
+
+autonumber
+
+actor User as u
+participant System as s
+
+u -> s: starts the process to enable candidate
+
+s -> u: shows the list of candidates and asks to select one
+
+u -> s: selects one candidate
+
+s -> u: asks for confirmation
+
+u -> s: confirms
+
+@enduml

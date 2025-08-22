@@ -1,0 +1,49 @@
+@startuml
+
+title CLASS DIAGRAM
+
+interface Runnable {
+
+}
+
+class TcpChatCli {
++createAuthRequest(byte[] usernameBytes, byte[] passwordBytes)
++sendAuthRequest(DataOutputStream out, String username, String password)
++sendOptionRequest(DataOutputStream out, int optionCode)
++sendCommTestRequest(DataOutputStream out)
++sendDisconnRequest(DataOutputStream out)
++handleServerMessages()
++handleNotificationsReponse()
+
+}
+
+class TcpChatSrvSum{
++getCandidateIdByEmail(String email)
++sendNotifications(List<Notifications> notis)
++handleNotificationsListResponse(byte[] data)
++Notifications(long Id,String notification, int isRead)
+}
+
+class Notifications{
+-long Id;
+-long candidateId;
+-String notification;
+-int isRead;
+
+}
+
+class CandidateRepository{
++getCandidateApplications(Connection connection, int candidateId)
++updateApplicationTrackingAndNotify(Connection connection, List<ApplicationInfo> applications, long candidateId)
++updateApplicationTracking(Connection connection, ApplicationInfo application, long candidateId)
+}
+
+TcpChatCli ..> TcpChatSrvSum
+TcpChatSrvSum ..> Notifications
+TcpChatSrvSum ..> CustomerRepository
+TcpChatCli ..> Notifications
+
+
+TcpChatCli -|> Runnable
+
+@enduml

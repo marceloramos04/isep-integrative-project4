@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title UC05 Sequence Diagram - Register a Customer
+autonumber
+
+actor Customer_Manager as actor
+participant RegisterCustomerUI as ui
+participant RegisterCustomerCtrl as ctrl
+participant "eapli.framework.(...).StringPredicates" as email
+participant CustomerManagementService as customer_management
+participant CustomerCode as code
+participant ZipCode as zipcode
+participant Customer as customer
+participant UserFactory as user_factory
+
+activate actor
+actor -> ui: ask to register a customer
+
+activate ui
+ui --> actor: ask the customer name
+deactivate
+
+actor -> ui: enter customer name
+
+activate ui
+ui --> actor: ask the customer email
+deactivate
+
+actor -> ui: enter the customer email
+
+activate ui
+ui -> ctrl:checkEmail()
+
+activate ctrl
+ctrl -> email: isEmail()
+
+activate email
+email --> ctrl: true/false
+deactivate
+
+ctrl->customer_management:isEmailUnique()
+
+activate customer_management
+customer_management-->ctrl: true/false
+deactivate
+
+ctrl --> ui:true/false
+deactivate
+
+ui --> actor: ask the customer code
+deactivate
+
+actor -> ui: enter the customer code
+
+activate ui
+ui -> ctrl: checkCustomerCode()
+
+activate ctrl
+ctrl -> code: checkCustomerCodeFormat()
+
+activate code
+code --> ctrl: true/false
+deactivate
+
+ctrl -> customer_management:isCustomerCodeUnique()
+
+activate customer_management
+customer_management --> ctrl: true/false
+deactivate
+
+ctrl --> ui: true/false
+deactivate
+
+ui --> actor: ask customer zipcode
+deactivate
+
+actor -> ui: enter customer zipcode
+
+activate ui
+ui -> ctrl: checkZipCode()
+
+activate ctrl
+ctrl -> zipcode: checkZipCodeFormat()
+
+activate zipcode
+zipcode --> ctrl: true/false
+deactivate
+
+ctrl --> ui: true/false
+deactivate
+
+ui --> actor:display info summary and ask confirmation for submission
+deactivate
+
+actor -> ui: enter confirmation
+
+activate ui
+ui->ctrl:registerCustomer()
+
+activate ctrl
+ctrl -> customer_management: registerCustomer(name, email, code, zipcode)
+
+activate customer_management
+customer_management-->ctrl:true/false
+deactivate
+
+ctrl->user_factory: createUser(name, email, UserRole.CUSTOMER)
+
+activate user_factory
+user_factory-->ctrl
+deactivate
+
+ctrl --> ui: true/false
+deactivate
+
+ui --> actor: operation success/failure
+deactivate
+@enduml

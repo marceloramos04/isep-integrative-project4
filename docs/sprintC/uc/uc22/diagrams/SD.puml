@@ -1,0 +1,103 @@
+@startuml
+
+autonumber
+
+actor User as u
+participant ScheduleInterviewUI as ui
+participant ScheduleInterviewController as ctrl
+participant CandidateRepository as crep
+participant JobOfferRepository as jrep
+participant ApplicationRepository as arep
+participant Application as app
+participant Interview as int
+
+activate u
+u -> ui : Initiciates the process of scheduling an interview for a candidate
+activate ui
+ui --> u : Asks for the email of the candidate to schedule an interview for
+deactivate ui
+u -> ui : Inputs the email of the candidate
+activate ui
+ui -> ctrl : getCandidateIdByEmail(EmailAddress.valueOf(email)
+deactivate ui
+activate ctrl
+ctrl ->crep : getCandidateIdByEmail(EmailAddress.valueOf(email)
+deactivate ctrl
+activate crep
+crep --> ctrl : Returns the candidate
+deactivate crep
+activate ctrl
+ctrl --> ui : Return the candidate
+deactivate ctrl
+activate ui
+ui -> ctrl : getApplicationsByCandidateId(c.getId())
+deactivate ui
+activate ctrl
+ctrl -> arep : getApplicationsByCandidateId(c.getId())
+deactivate ctrl
+activate arep
+arep --> ctrl : Returns the applications list of that candidate
+deactivate arep
+activate ctrl
+ctrl --> ui : Returns the applications list of that candidate
+deactivate ctrl
+activate ui
+ui -> ctrl : getJobOpenings(jobIds)
+deactivate ui
+activate ctrl
+ctrl -> jrep : getJobOpenings(List<Long> jobIds)
+deactivate ctrl
+activate jrep
+jrep --> ctrl : Returns the job openings for the valid candidate applications
+deactivate jrep
+activate ctrl
+ctrl --> ui : Returns the job openings for the valid candidate applications
+deactivate ctrl
+activate ui
+ui -> u : Asks for the job opening to schedule an interview for
+deactivate ui
+u -> ui : Inputs the job opening to schedule an interview for
+activate ui
+ui -> u : asks for the date and time for the interview (the max date to schedule for is displayed)
+deactivate ui
+u -> ui : Inputs the date and time for the interview
+activate ui
+ui -> ctrl : createInterview(interviewDateTime, endDate, is)
+deactivate ui
+activate ctrl
+ctrl -> int : createInterview(interviewDateTime, endDate, is)
+deactivate ctrl
+activate int
+int --> ctrl : saves locally the interview
+deactivate int
+activate ctrl
+ctrl --> ui : Returns the interview
+deactivate ctrl
+activate ui
+ui --> u : displays interview information (and the day of the week of the scheduled interview) and asks for the user confirmation
+deactivate ui
+u -> ui : Confirms the interview
+activate ui
+ui -> ctrl : saveApplication(candidateApp, interview)
+deactivate ui
+activate ctrl
+ctrl -> app : setInterview(interview)
+deactivate ctrl
+activate app
+app -> ctrl : returns
+deactivate app
+activate ctrl
+ctrl -> arep : save(application)
+deactivate ctrl
+activate arep
+arep --> ctrl : returns operation success
+deactivate arep
+activate ctrl
+ctrl --> ui : returns operation success
+deactivate ctrl
+activate ui
+ui --> u : displays success message
+deactivate ui
+deactivate u
+
+@enduml

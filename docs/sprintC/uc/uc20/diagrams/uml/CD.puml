@@ -1,0 +1,68 @@
+@startuml
+
+title UC20 CLASS DIAGRAM
+
+interface Runnable {
+    +run()
+}
+
+class VerificationRequirementsUI {
+    + run()
+}
+
+class VerificationRequirementsController {
+    + GetJobOpeningsOnScreeningPhaseService()
+    + getJobOpening()
+    + verifyRequirements(Long id)
+}
+
+class JobOpeningRepository {
+    + findAll()
+}
+
+class ApplicationRepository {
+    + findAllByJobOpeningId()
+    + save()
+}
+
+class JobOpening {
+    - id;
+
+    + isActive()
+    + closeActivePhase()
+}
+
+class Application {
+    - requirementsFile
+    - jobOpeningId
+
+    + getRequirementsFile()
+    + getJobOpeningId()
+}
+
+class GetJobOpeningsOnScreeningPhaseService{
+    + GetJobOpeningsOnScreeningPhaseService()
+}
+
+class VerificationRequirementsService{
+    + verifyRequirements(Long id)
+}
+
+
+Runnable -|> VerificationRequirementsUI
+
+VerificationRequirementsUI ..> VerificationRequirementsController
+
+VerificationRequirementsController ..> GetJobOpeningsOnScreeningPhaseService
+VerificationRequirementsController ..> JobOpeningRepository
+VerificationRequirementsController ..> JobOpening
+VerificationRequirementsController ..> VerificationRequirementsService
+VerificationRequirementsService ..> ApplicationRepository
+VerificationRequirementsService ..> Application
+
+
+JobOpeningRepository ..> JobOpening
+
+GetJobOpeningsOnScreeningPhaseService .l.> JobOpeningRepository
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title UC05 Analysis - Register Customer
+
+object Customer{
+name
+email
+code
+address
+}
+
+object Customer_Manager
+
+Customer_Manager->Customer:registers
+@enduml

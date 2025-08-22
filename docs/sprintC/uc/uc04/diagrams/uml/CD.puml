@@ -1,0 +1,30 @@
+@startuml
+
+title UC04 CLASS DIAGRAM
+
+interface Runnable {
+    + run()
+}
+
+class ListUsersUI {
+    + run()
+}
+
+class UserRepository {
+    + findAll()
+}
+
+class ListUsersController {
+    + listUsers()
+}
+
+class ListUsersService {
+    + listUsers()
+}
+
+Runnable -|> ListUsersUI
+ListUsersUI ..> ListUsersController
+ListUsersController ..> ListUsersService
+ListUsersService .> UserRepository
+
+@enduml
