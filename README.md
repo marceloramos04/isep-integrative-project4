@@ -1,12 +1,29 @@
 # Project Jobs4U
 
-## Description of the Project
+## Description
+
+Jobs4U is a fictional company specialized in talent acquisition. The company provides recruitment services for job positions in its clients. The aim of this project is to develop, in an exploratory way, a solution that allows automating the main activities of the company. Therefore, a minimum viable product should be developed in 3 months.
+
+The company’s clients are other companies or entities that need to recruit human resources. In response to requests from its clients, Jobs4U develops all activities that allow it to select a set of candidates for job offers (from its clients). At the end of the process, Jobs4U must deliver to its client an ordered list of candidates for each job offer. The final recruitment decision is the responsibility of the client.
 
 [System Specifications](docs/projeto-integrado-sys-spec-v8.pdf)
 
-## Planning and Technical Documentation
+## Purpose
 
-[Planning and Technical Documentation](docs/readme.md)
+This project was required by the LAPR4 curricular unit/subject (Laboratory/Project IV) in the fourth semester of the Bachelor’s in Computer Engineering at ISEP. The objective of the curricular unit is to integrate the content from the various subjects of that semester and to simulate a real-world collaborative development environment as found in the software industry.
+
+## Technologies/Tools Used
+
+- **Java**
+- **Spring Boot**
+- **Maven**
+- **Domain-Driven-Design**
+- **GitHub** for version control and project management
+- **GitHub Actions** for continuous-integration
+
+## Global Artifacts
+
+[Global Artifacts](docs/sprintC/global-artifacts/Readme.md)
 
 ## How to Build
 
@@ -63,7 +80,3 @@ Caso o utilizador pretenda limpar os artefatos produzidos em builds anteriores, 
 To generate plantuml diagrams for documentation execute the script (for the moment, only for linux/unix/macos):
 
 `./generate-plantuml-diagrams.sh`
-
-## Global Artifacts
-
-[Global Artifacts](docs/sprintC/global-artifacts/Readme.md)
